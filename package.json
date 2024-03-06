@@ -10,7 +10,7 @@
     "Reactjs",
     "typescript"
   ],
-  "license":"MIT",
+  "license":"Apache-2.0",
   "author": {
     "email": "nestjs@googlegroups.com",
     "name": "thind9xdev",
