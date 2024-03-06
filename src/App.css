@@ -6,7 +6,12 @@
   border-radius: 5px;
   background-color: #f9f9f9;
 }
-
+.button_func{
+  background-color: darkgray;
+}
+.button_func_equal{
+  background-color: aqua;
+}
 .input,
 .output {
   width: calc(100% - 10px);
@@ -22,7 +27,9 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
 }
-
+.button_func_del{
+  background-color: rgb(228, 161, 161);
+}
 button {
   padding: 15px;
   border: none;
@@ -32,6 +39,6 @@ button {
   background-color: #eee;
 }
 
-button:hover {
+/* button:hover {
   background-color: #ddd;
-}
+} */
