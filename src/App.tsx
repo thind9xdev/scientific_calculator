@@ -219,10 +219,10 @@ const App: React.FC = () => {
         <button className="button_func" onClick={() => handleClick(".")}>
           .
         </button>
-        <button className="button_func" onClick={() =>  handleDeleteAll()}>
+        <button className="button_func_del" onClick={() =>  handleDeleteAll()}>
           C
         </button>
-        <button className="button_func_del" onClick={() => handleClick("+")}>
+        <button className="button_func" onClick={() => handleClick("+")}>
           +
         </button>
         <button className="button_func_equal" onClick={() => handleCalculate()}>
