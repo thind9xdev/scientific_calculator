@@ -1,7 +1,7 @@
 {
   "name": "calcl",
   "description": "Máy tính khoa học, scientific calculator",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "keywords": [
     "Máy tính khoa học",
     "scientific calculator",
@@ -10,7 +10,7 @@
     "Reactjs",
     "typescript"
   ],
-  "license":"Apache-2.0",
+  "license": "Apache-2.0",
   "author": {
     "email": "nestjs@googlegroups.com",
     "name": "thind9xdev",
