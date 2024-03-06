@@ -80,9 +80,10 @@ const App: React.FC = () => {
     expression = expression.replace(/∛(\d+)/g, (_, number) => {
       return Math.cbrt(Number(number)).toString();
     });
-   expression = expression.replace(/!(\d+)/g, (_, number) => {
-      return  factorial(Number(number)).toString();
-    });
+  
+  expression = expression.replace(/(\d+)!/g, (_, number) => {
+    return factorial(Number(number)).toString();
+   });
 
     try {
       setOutput(eval(expression).toString());
