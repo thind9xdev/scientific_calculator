@@ -176,7 +176,7 @@ const App: React.FC = () => {
         >
           Del
         </button>{" "}
-        {/* Nút xóa */}
+        
         <button className="button_number" onClick={() => handleClick("7")}>
           7
         </button>
@@ -219,11 +219,11 @@ const App: React.FC = () => {
         <button className="button_func" onClick={() => handleClick(".")}>
           .
         </button>
-        <button className="button_func" onClick={() => handleClick("+")}>
-          +
-        </button>
-        <button className="button_func_del" onClick={() => handleDeleteAll()}>
+        <button className="button_func" onClick={() =>  handleDeleteAll()}>
           C
+        </button>
+        <button className="button_func_del" onClick={() => handleClick("+")}>
+          +
         </button>
         <button className="button_func_equal" onClick={() => handleCalculate()}>
           =
