@@ -22,8 +22,6 @@ import "./App.css";
 const App: React.FC = () => {
   const [input, setInput] = useState<string>("");
   const [output, setOutput] = useState<string>("");
-
-
   const handleClick = (value: string): void => {
     if (value === "=") {
       const expression: string = input;
@@ -50,13 +48,26 @@ const App: React.FC = () => {
       setInput((prevInput) => prevInput + "Math.tan(");
     }
     else if (value === "asin") {
-      setInput((prevInput) => prevInput + "Math.asin(");
+      setInput((prevInput) => prevInput + "Math.asinh(");
     }
+    else if (value === "x") {
+      setInput((prevInput) => prevInput + "x");
+    }
+    else if (value === "square") {
+      setInput((prevInput) => prevInput + "**2");
+    } else if (value === "cube") {
+      setInput((prevInput) => prevInput + "**3"); 
+    } else if (value === "power") {
+      setInput((prevInput) => prevInput + "**");
+    }
+     
     else {
       setInput((prevInput) => prevInput + value);
     }
   };
-
+  // const handleClickMenu = () =>{
+   
+  // }
   return (
     <div className="calculator">
       <input
@@ -82,6 +93,12 @@ const App: React.FC = () => {
         <button onClick={() => handleClick("cos")}>cos</button>
         <button onClick={() => handleClick("tan")}>tan</button>
         <button onClick={() => handleClick("asin")}>asin</button>
+        {/* <button onClick={() => handleClick("x")}>x</button> */}
+
+        <button onClick={() => handleClick("square")}>x²</button>
+        <button onClick={() => handleClick("cube")}>x³</button> 
+        <button onClick={() => handleClick("power")}>^</button> 
+        {/* <button style={{backgroundColor:"green"}} onClick={() => handleClickMenu()}>menu</button>  */}
 
         <button onClick={() => handleClick("7")}>7</button>
         <button onClick={() => handleClick("8")}>8</button>
