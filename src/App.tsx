@@ -14,8 +14,6 @@
  limitations under the License.
  */
 
-
-
 import React, { useState } from "react";
 import "./App.css";
 
@@ -24,7 +22,9 @@ const App: React.FC = () => {
   const [output, setOutput] = useState<string>("");
   const handleClick = (value: string): void => {
     if (value === "=") {
-      const expression: string = input;
+      let expression: string = input;
+      expression = expression.replace(/(\d)\(/g, "$1*(");
+      expression = expression.replace(/\)(\d)/g, ")*$1");
       try {
         setOutput(eval(expression).toString());
       } catch (error) {
@@ -37,37 +37,33 @@ const App: React.FC = () => {
       setInput((prevInput) => prevInput + "Math.sqrt(");
     } else if (value === "cbrt") {
       setInput((prevInput) => prevInput + "Math.cbrt(");
-    }
-    else if (value === "sin") {
-      setInput((prevInput) => prevInput + "Math.sin(");
-    }
-    else if (value === "cos") {
+    } else if (value === "(") {
+      setInput((prevInput) => prevInput + "(");
+    } else if (value === "cos") {
       setInput((prevInput) => prevInput + "Math.cos(");
-    }
-    else if (value === "tan") {
+    } else if (value === "tan") {
       setInput((prevInput) => prevInput + "Math.tan(");
-    }
-    else if (value === "asin") {
+    } else if (value === "asin") {
       setInput((prevInput) => prevInput + "Math.asinh(");
-    }
-    else if (value === "x") {
+    } else if (value === "x") {
       setInput((prevInput) => prevInput + "x");
-    }
-    else if (value === "square") {
+    } else if (value === "square") {
       setInput((prevInput) => prevInput + "**2");
     } else if (value === "cube") {
-      setInput((prevInput) => prevInput + "**3"); 
+      setInput((prevInput) => prevInput + "**3");
     } else if (value === "power") {
       setInput((prevInput) => prevInput + "**");
-    }
-     
-    else {
+    } else {
       setInput((prevInput) => prevInput + value);
     }
   };
   // const handleClickMenu = () =>{
-   
+
   // }
+  const handleDelete = (): void => {
+    setInput((prevInput) => prevInput.slice(0, -1)); // Xóa ký tự cuối cùng khỏi chuỗi
+    setOutput(""); // Xóa kết quả
+  };
   return (
     <div className="calculator">
       <input
@@ -94,12 +90,17 @@ const App: React.FC = () => {
         <button onClick={() => handleClick("tan")}>tan</button>
         <button onClick={() => handleClick("asin")}>asin</button>
         {/* <button onClick={() => handleClick("x")}>x</button> */}
-
         <button onClick={() => handleClick("square")}>x²</button>
-        <button onClick={() => handleClick("cube")}>x³</button> 
-        <button onClick={() => handleClick("power")}>^</button> 
+        <button onClick={() => handleClick("cube")}>x³</button>
+        <button onClick={() => handleClick("power")}>^</button>
         {/* <button style={{backgroundColor:"green"}} onClick={() => handleClickMenu()}>menu</button>  */}
-
+        <button
+          style={{ backgroundColor: "darkgray" }}
+          onClick={() => handleDelete()}
+        >
+          Del
+        </button>{" "}
+        {/* Nút xóa */}
         <button onClick={() => handleClick("7")}>7</button>
         <button onClick={() => handleClick("8")}>8</button>
         <button onClick={() => handleClick("9")}>9</button>
