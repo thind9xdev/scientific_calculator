@@ -1,11 +1,18 @@
 # Scientific Calculator Reactjs use Typescript
 
-# Getting started :
+## Getting started :
  1. Git clone  git@github.com:thind9xdev/scientific_calculator.git
  2. cd scientific_calculator
  3. npm i
  4. npm start 
+
+## Screenshot:
+
 ![Scientific Calculator Reactjs use Typescript](image.png)
+
+![Scientific Calculator Reactjs use Typescript](image-1.png)
+
+![Scientific Calculator Reactjs](image-2.png)
 
 (c) 2023 Phuong My Chi  Entertainment Co.,Ltd
  Licensed under the Apache License, Version 2.0 (the "License");
