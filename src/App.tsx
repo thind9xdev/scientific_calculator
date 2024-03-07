@@ -84,6 +84,12 @@ const App: React.FC = () => {
         ? Math.cos(Number(number)).toString()
         : Math.cos(rad(Number(number))).toString();
     });
+    
+    expression = expression.replace(/asin\((\d+)\)/g, (_, number) => {
+      return isRad
+        ? Math.asin(Number(number)).toString()
+        : Math.asin(rad(Number(number))).toString();
+    });
     expression = expression.replace(/tan\((\d+)\)/g, (_, number) => {
       return isRad
         ? Math.tan(Number(number)).toString()
