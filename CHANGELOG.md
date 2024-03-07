@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.3](https://github.com/thind9xdev/scientific_calculator/compare/v0.1.2...v0.1.3) (2024-03-07)
+
+
+### Bug Fixes
+
+* fix display ([b953c5f](https://github.com/thind9xdev/scientific_calculator/commit/b953c5f0af94cdc4a5025be12f5b7d8749620fc9))
+
 ### [0.1.2](https://github.com/thind9xdev/scientific_calculator/compare/v0.1.1...v0.1.2) (2024-03-06)
 
 ### 0.1.1 (2024-03-06)
