@@ -16,24 +16,13 @@
 
 import React, { useState } from "react";
 import "./App.css";
-
+import { KeyBoard, SceenDisPlay } from "./components";
+import { factorial, rad } from "./utils";
 const App: React.FC = () => {
   const [input, setInput] = useState<string>("");
   const [output, setOutput] = useState<string>("");
-  const [isRad, setIsRad] = useState<boolean>(false);
+  const [isRad, setIsRad] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
-
-  const rad = (degree: number) => {
-    return degree * (Math.PI / 180);
-  };
-
-  function factorial(n: number): number {
-    if (n === 0) {
-      return 1;
-    } else {
-      return n * factorial(n - 1);
-    }
-  }
 
   const handleClick = (value: string): void => {
     rad(0);
@@ -43,16 +32,16 @@ const App: React.FC = () => {
       C: "",
       sqrt: "√",
       cbrt: "∛",
-      sin: `Math.sin(${isRad ? "rad(" : ""}`,
-      cos: `Math.cos(${isRad ? "rad(" : ""}`,
-      tan: `Math.tan(${isRad ? "rad(" : ""}`,
-      asin: `Math.asinh(${isRad ? "rad(" : ""}`,
+      sin: `sin(`,
+      cos: `cos(`,
+      tan: `tan(`,
+      asin: `asin(`,
       "X!": "!",
       x: "x",
-      square: "**2",
-      cube: "**3",
+      square: "²",
+      cube: "³",
       power: "**",
-      π: "Math.PI",
+      π: "π",
       "(": "(",
       ")": ")",
     };
@@ -68,6 +57,8 @@ const App: React.FC = () => {
     setInput("");
     setOutput("");
   };
+
+ 
   const handleCalculate = (): void => {
     let expression: string = input;
 
@@ -80,12 +71,42 @@ const App: React.FC = () => {
     expression = expression.replace(/∛(\d+)/g, (_, number) => {
       return Math.cbrt(Number(number)).toString();
     });
-  
-  expression = expression.replace(/(\d+)!/g, (_, number) => {
-    return factorial(Number(number)).toString();
-   });
+    expression = expression.replace(/π/g, Math.PI.toString());
+    expression = expression.replace(/sin\((\d+)\)/g, (_, number) => {
+      return isRad
+        ? Math.sin(Number(number)).toString() 
+        : Math.sin(rad(Number(number))).toString() 
+    });
+    
+
+    expression = expression.replace(/cos\((\d+)\)/g, (_, number) => {
+      return isRad
+        ? Math.cos(Number(number)).toString()
+        : Math.cos(rad(Number(number))).toString();
+    });
+    expression = expression.replace(/tan\((\d+)\)/g, (_, number) => {
+      return isRad
+        ? Math.tan(Number(number)).toString()
+        : Math.tan(rad(Number(number))).toString();
+    });
+    expression = expression.replace(/asin\((\d+)\)/g, (_, number) => {
+      return isRad
+        ? Math.asin(Number(number)).toString()
+        : Math.asin(rad(Number(number))).toString();
+    });
+    expression = expression.replace(/(\d+)²/g, (_, number) => {
+      return Math.pow(Number(number), 2).toString();
+    });
+    expression = expression.replace(/(\d+)³/g, (_, number) => {
+      return Math.pow(Number(number), 3).toString();
+    });
+
+    expression = expression.replace(/(\d+)!/g, (_, number) => {
+      return factorial(Number(number)).toString();
+    });
 
     try {
+    
       setOutput(eval(expression).toString());
       setIsError(false);
     } catch (error: any) {
@@ -96,139 +117,18 @@ const App: React.FC = () => {
 
   return (
     <div className="calculator">
-      <input
-        type="text"
-        className="input"
-        value={input}
-        placeholder="Phép tính"
-        readOnly
-      />
-      <input
-        type="text"
-        style={
-          isError
-            ? {
-                fontSize: "13px",
-                color: "red",
-              }
-            : {}
-        }
-        className="output"
-        value={output}
-        placeholder="Kết quả"
-        readOnly
-      />
+      <SceenDisPlay input={input} isError={isError} output={output} />
+   
       <p style={{ fontSize: "12px" }} className="model">
         {isRad ? "Rad" : "Deg"}
       </p>
-      <div className="buttons">
-        <button className="button_func" onClick={() => setIsRad(false)}>
-          Deg
-        </button>
-        <button className="button_func" onClick={() => setIsRad(true)}>
-          Rad
-        </button>
-        <button className="button_func" onClick={() => handleClick("X!")}>
-          X!
-        </button>
-        <button className="button_func" onClick={() => handleClick("π")}>
-          {" "}
-          π
-        </button>
-        <button className="button_func" onClick={() => handleClick("(")}>
-          (
-        </button>
-        <button className="button_func" onClick={() => handleClick(")")}>
-          )
-        </button>
-        <button className="button_func" onClick={() => handleClick("sqrt")}>
-          √
-        </button>
-        <button className="button_func" onClick={() => handleClick("cbrt")}>
-          ∛
-        </button>
-        <button className="button_func" onClick={() => handleClick("sin")}>
-          sin
-        </button>
-        <button className="button_func" onClick={() => handleClick("cos")}>
-          cos
-        </button>
-        <button className="button_func" onClick={() => handleClick("tan")}>
-          tan
-        </button>
-        <button className="button_func" onClick={() => handleClick("asin")}>
-          asin
-        </button>
-        {/* <button onClick={() => handleClick("x")}>x</button> */}
-        <button className="button_func" onClick={() => handleClick("square")}>
-          x²
-        </button>
-        <button className="button_func" onClick={() => handleClick("cube")}>
-          x³
-        </button>
-        <button className="button_func" onClick={() => handleClick("power")}>
-          ^
-        </button>
-        {/* <button style={{backgroundColor:"green"}} onClick={() => handleClickMenu()}>menu</button>  */}
-        <button
-          style={{ backgroundColor: "darkorange" }}
-          onClick={() => handleDelete()}
-        >
-          Del
-        </button>{" "}
-        
-        <button className="button_number" onClick={() => handleClick("7")}>
-          7
-        </button>
-        <button className="button_number" onClick={() => handleClick("8")}>
-          8
-        </button>
-        <button className="button_number" onClick={() => handleClick("9")}>
-          9
-        </button>
-        <button className="button_func" onClick={() => handleClick("/")}>
-          /
-        </button>
-        <button className="button_number" onClick={() => handleClick("4")}>
-          4
-        </button>
-        <button className="button_number" onClick={() => handleClick("5")}>
-          5
-        </button>
-        <button className="button_number" onClick={() => handleClick("6")}>
-          6
-        </button>
-        <button className="button_func" onClick={() => handleClick("*")}>
-          *
-        </button>
-        <button className="button_number" onClick={() => handleClick("1")}>
-          1
-        </button>
-        <button className="button_number" onClick={() => handleClick("2")}>
-          2
-        </button>
-        <button className="button_number" onClick={() => handleClick("3")}>
-          3
-        </button>
-        <button className="button_func" onClick={() => handleClick("-")}>
-          -
-        </button>
-        <button className="button_number" onClick={() => handleClick("0")}>
-          0
-        </button>
-        <button className="button_func" onClick={() => handleClick(".")}>
-          .
-        </button>
-        <button className="button_func_del" onClick={() =>  handleDeleteAll()}>
-          C
-        </button>
-        <button className="button_func" onClick={() => handleClick("+")}>
-          +
-        </button>
-        <button className="button_func_equal" onClick={() => handleCalculate()}>
-          =
-        </button>
-      </div>
+      <KeyBoard
+        handleCalculate={handleCalculate}
+        handleClick={handleClick}
+        handleDelete={handleDelete}
+        handleDeleteAll={handleDeleteAll}
+        setIsRad={setIsRad}
+      />
     </div>
   );
 };
