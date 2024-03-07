@@ -65,6 +65,8 @@ const App: React.FC = () => {
     expression = expression.replace(/(\d)\(/g, "$1*(");
     expression = expression.replace(/\)(\d)/g, ")*$1");
 
+   expression = expression.replace(/(\d+)/g, "$1*√");
+
     expression = expression.replace(/√(\d+)/g, (_, number) => {
       return Math.sqrt(Number(number)).toString();
     });
