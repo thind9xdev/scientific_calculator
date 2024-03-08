@@ -62,7 +62,7 @@ const App: React.FC = () => {
     switch (func) {
         case "cos":
             return isRad ? Math.cos(number) : Math.cos(rad(number));
-        // Thêm các hàm số khác nếu cần
+       
         default:
             throw new Error("Hàm không được hỗ trợ");
     }
