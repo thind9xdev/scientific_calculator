@@ -61,6 +61,9 @@ const App: React.FC = () => {
  
   const handleCalculate = (): void => {
     let expression: string = input;
+   expression = expression.replace(/(\d)√(\d+)/g, (_, coefficient, radicand) => {
+        return (parseFloat(coefficient) * Math.sqrt(parseFloat(radicand))).toString();
+    });
 
     expression = expression.replace(/(\d)\(/g, "$1*(");
     expression = expression.replace(/\)(\d)/g, ")*$1");
