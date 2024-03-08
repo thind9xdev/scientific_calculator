@@ -60,8 +60,14 @@ const App: React.FC = () => {
 
  function evaluateFunction(func: string, number: number, isRad: boolean): number {
     switch (func) {
+      case "sin":
+            return isRad ? Math.sin(number) : Math.sin(rad(number));
+       
         case "cos":
             return isRad ? Math.cos(number) : Math.cos(rad(number));
+      case "tan":
+            return isRad ? Math.tan(number) : Math.tan(rad(number));
+       
        
         default:
             throw new Error("Hàm không được hỗ trợ");
@@ -72,6 +78,11 @@ const App: React.FC = () => {
     let expression: string = input;
    expression = expression.replace(/(\d)√(\d+)/g, (_, coefficient, radicand) => {
         return (parseFloat(coefficient) * Math.sqrt(parseFloat(radicand))).toString();
+    });
+
+   expression = expression.replace(/(\w+)\((\d+)\)(²|³|\^(\d+))/g, (_, func, number, exponent) => {
+        const result = evaluateFunction(func, Number(number), isRad);
+        return Math.pow(result, parseInt(exponent) || 2).toString();
     });
 
     expression = expression.replace(/(\d)\(/g, "$1*(");
