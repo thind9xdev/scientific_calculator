@@ -58,6 +58,15 @@ const App: React.FC = () => {
     setOutput("");
   };
 
+ function evaluateFunction(func: string, number: number, isRad: boolean): number {
+    switch (func) {
+        case "cos":
+            return isRad ? Math.cos(number) : Math.cos(rad(number));
+        // Thêm các hàm số khác nếu cần
+        default:
+            throw new Error("Hàm không được hỗ trợ");
+    }
+}
  
   const handleCalculate = (): void => {
     let expression: string = input;
